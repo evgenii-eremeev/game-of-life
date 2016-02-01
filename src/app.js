@@ -2,15 +2,11 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 var PropTypes = React.PropTypes;
 
-var App = React.createClass({
-  render: function() {
-    return (
-      <div>
-        Hello!
-      </div>
-    );
-  }
-});
+const App = () => (
+  <div>
+    Hello World!
+  </div>
+)
 
 ReactDOM.render(
   <App />,
