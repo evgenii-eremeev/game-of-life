@@ -1,9 +1,8 @@
 'use strict';
 
-const deepFreeze = require('deep-freeze');
-const expect = require('expect');
-
-const changeGrid = require('../reducers/changeGrid.js');
+var deepFreeze = require('deep-freeze');
+var expect = require('expect');
+var changeGrid = require('../reducers/changeGrid.js');
 
 describe('changeGrid', () => {
   describe('NEXT_GEN', () => {
@@ -49,6 +48,30 @@ describe('changeGrid', () => {
       expect(
         changeGrid(gridBefore, {})
       ).toEqual(gridBefore);
+    });
+  });
+
+  describe('CREATE', () => {
+    it('returns new empty board according action.width and action.height', () => {
+      const gridBefore = [];
+      const action = {
+        type: 'CREATE',
+        width: 5,
+        height: 4
+      };
+      const gridAfter = [
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false],
+        [false, false, false, false, false]
+      ];
+      deepFreeze(gridBefore);
+      deepFreeze(action);
+
+      expect(
+        changeGrid([], action)
+      ).toEqual(gridAfter);
+
     });
   });
 

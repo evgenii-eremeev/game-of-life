@@ -1,9 +1,8 @@
 'use strict';
 
-const deepFreeze = require('deep-freeze');
-const expect = require('expect');
-
-const grid = require('../utils/grid')();
+var deepFreeze = require('deep-freeze');
+var expect = require('expect');
+var grid = require('../utils/grid')();
 
 describe('grid', () => {
 
@@ -150,4 +149,22 @@ describe('grid', () => {
       ).toEqual(grid5);
     });
   }); // end describe
+
+  describe('grid.toggleCell()', () => {
+    it('should return new grid with toggled cell', () => {
+      const gridBefore = [
+        [false, false],
+        [false, false]
+      ];
+      const gridAfter = [
+        [false, true],
+        [false, false]
+      ];
+      deepFreeze(gridBefore);
+
+      expect(
+        grid.toggleCell(gridBefore, 0, 1)
+      ).toEqual(gridAfter);
+    });
+  });
 }); // end tests of grid
