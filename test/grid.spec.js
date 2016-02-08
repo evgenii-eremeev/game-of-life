@@ -1,8 +1,8 @@
 'use strict';
 
-var deepFreeze = require('deep-freeze');
-var expect = require('expect');
-var grid = require('../utils/grid')();
+import deepFreeze from 'deep-freeze';
+import expect from 'expect';
+import grid from '../utils/grid';
 
 describe('grid', () => {
 

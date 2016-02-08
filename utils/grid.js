@@ -5,7 +5,7 @@ function mod(n, m) {
 };
 
 
-function grid() {
+export default (function grid() {
   const create = (width, heigth) => {
     let grid = [];
     let row;
@@ -57,6 +57,6 @@ function grid() {
   };
 
   return { create, liveNeighbours, nextGen, toggleCell };
-}
+}());
 
-module.exports = grid;
+

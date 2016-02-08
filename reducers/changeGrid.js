@@ -1,16 +1,18 @@
 'use strict';
 
-var grid = require('../utils/grid.js')();
+import grid from '../utils/grid';
 
-function changeGrid(state = [], action) {
+export default function changeGrid(state = [], action) {
   switch (action.type) {
     case 'NEXT_GEN':
       return grid.nextGen(state);
     case 'CREATE':
       return grid.create(action.width, action.height);
+   	case 'TOGGLE_CELL':
+   	  return grid.toggleCell(state, action.row, action.col);
+    case 'RESET_GRID':
+      return grid.create(state[0].length, state.length);
     default:
       return state;
   }
 }
-
-module.exports = changeGrid;

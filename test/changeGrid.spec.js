@@ -1,8 +1,8 @@
 'use strict';
 
-var deepFreeze = require('deep-freeze');
-var expect = require('expect');
-var changeGrid = require('../reducers/changeGrid.js');
+import deepFreeze from 'deep-freeze';
+import expect from 'expect';
+import changeGrid from '../reducers/changeGrid';
 
 describe('changeGrid', () => {
   describe('NEXT_GEN', () => {
@@ -75,4 +75,46 @@ describe('changeGrid', () => {
     });
   });
 
+  describe('TOGGLE_CELL', () => {
+    it('returns new board with toggled cell', () => {
+      const gridBefore = [
+        [false, false],
+        [false, false]
+      ];
+      const action = {
+        type: 'TOGGLE_CELL',
+        row: 0,
+        col: 1
+      };
+      const gridAfter = [
+        [false, true],
+        [false, false]
+      ];
+
+      expect(
+        changeGrid(gridBefore, action)
+      ).toEqual(gridAfter);
+
+    });
+  });
+
+  describe('RESET_GRID', () => {
+    it('should return grid with all cells set to false', () => {
+      const gridBefore = [
+        [true, true],
+        [true, true]
+      ];
+      const action = {
+        type: 'RESET_GRID'
+      };
+      const gridAfter = [
+        [false, false],
+        [false, false]
+      ];
+
+      expect(
+        changeGrid(gridBefore, action)
+      ).toEqual(gridAfter);
+    });
+  });
 });
