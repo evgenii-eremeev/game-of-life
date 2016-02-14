@@ -117,4 +117,32 @@ describe('changeGrid', () => {
       ).toEqual(gridAfter);
     });
   });
+
+  describe('RANDOM_GRID', () => {
+    it('returns random grid', () => {
+      const gridBefore = [
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false],
+        [false, false, false, false]
+      ];
+      const action = {
+        type: 'RANDOM_GRID',
+        chance: 0.5
+      };
+
+      expect(
+        changeGrid(gridBefore, action)
+      ).toNotEqual(gridBefore);
+
+      expect(
+        changeGrid(gridBefore, action).length
+      ).toBe(gridBefore.length);
+
+      expect(   
+        changeGrid(gridBefore, action)[0].length
+      ).toBe(gridBefore[0].length);
+    });
+  });
 });

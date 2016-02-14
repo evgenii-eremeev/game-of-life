@@ -12,6 +12,12 @@ export default function changeGrid(state = [], action) {
    	  return grid.toggleCell(state, action.row, action.col);
     case 'RESET_GRID':
       return grid.create(state[0].length, state.length);
+    case 'RANDOM_GRID':
+      return grid.create(
+        state[0].length,
+        state.length,
+        action.chance
+      );
     default:
       return state;
   }

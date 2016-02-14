@@ -6,13 +6,16 @@ function mod(n, m) {
 
 
 export default (function grid() {
-  const create = (width, heigth) => {
+  const create = (width, heigth, random = 0) => {
+    let cell;
     let grid = [];
     let row;
     for (let i = 0; i < heigth; i++) {
       row = [];
       for (let j = 0; j < width; j++) {
-        row.push(false);
+        cell = random ? 
+          Math.random() > (1 - random) : false;
+        row.push(cell);
       }
       grid.push(row);
     }

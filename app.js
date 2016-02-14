@@ -15,6 +15,17 @@ import ControlPanel from './components/ControlPanel';
 
 const store = createStore(gameOfLife);
 
+store.dispatch({
+	type: 'CREATE',
+	width: 20,
+	height: 10
+});
+store.dispatch({
+	type: 'RANDOM_GRID',
+	chance: 0.4
+});
+
+
 const App = () => (
 	<div>
 		<CanvasGrid />
