@@ -9,7 +9,7 @@ const Canvas = ({ state, onCellClick }) => {
 			return (
 				<td key={i + ',' + j}
 					style={{
-						backgroundColor: cell ? 
+						backgroundColor: cell ?
 							'red' : 'black',
 						width: 20,
 						height: 20,
