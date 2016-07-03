@@ -6,33 +6,30 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // Reducers
-import rootReducer from './reducers/rootReducer'
+import rootReducer from './reducers/rootReducer';
+
+// Actions
+import { createGrid, randomGrid } from './actions/changeGridActions.js';
 
 // Components
-import CanvasGrid from './components/CanvasGrid';
-import Init from './components/Init';
+import Grid from './components/Grid';
+import SizeButton from './components/SizeButton';
 import ControlPanel from './components/ControlPanel';
 
 const store = createStore(rootReducer);
 
-store.dispatch({
-	type: 'CREATE',
-	width: 20,
-	height: 10
-});
-store.dispatch({
-	type: 'RANDOM_GRID',
-	chance: 0.4
-});
+// initial state
+store.dispatch(createGrid(20, 10));
+store.dispatch(randomGrid(0.3));
 
 
 const App = () => (
-	<div>
-		<CanvasGrid />
-		<Init width={20} height={10} />
-		<Init width={30} height={20} />
-		<br />
+	<div className="center">
+		<h1>Game of Life</h1>
 		<ControlPanel />
+		<Grid />
+		<SizeButton width={20} height={10} />
+		<SizeButton width={30} height={20} />
 	</div>
 );
 

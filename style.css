@@ -1,7 +1,23 @@
-table {
+.grid {
 	border-collapse: collapse;
+	overflow-x: scroll;
+	margin: 1em auto;
 }
 
-table, th, td {
-	border: 1px solid grey;
+.center {
+	text-align: center;
+}
+
+.cell {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 30%;
+}
+
+.cell-alive {
+	background-color: red;
+}
+
+.cell-dead {
+	background-color: darkgrey;
 }
