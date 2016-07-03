@@ -36,7 +36,7 @@ const Canvas = ({ state, onCellClick }) => {
 const mapStateToProps = (state) => {
 	return {
 		state: state.changeGrid
-  	}
+	}
 };
 
 const mapDispatchToProps = (dispatch) => {

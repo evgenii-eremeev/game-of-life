@@ -88,7 +88,7 @@ describe('grid', () => {
   }); // end describe
 
   describe('grid.nextGen()', () => {
-    it('shoul return next gen according to rules of "Game of Life"', () => {
+    it('should return next gen according to rules of "Game of Life"', () => {
       const grid1 = [
         [false, false, false, false, false],
         [false, false, false, false, false],

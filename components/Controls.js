@@ -1,68 +1,32 @@
-'use strict';
-
 import React from 'react';
 import { connect } from 'react-redux';
 
-const ControlButtons = ({
-	onStartClick, 
-	interval, 
-	setTick, 
-	resetTick
-}) => {
+import { nextGen } from '../actions/changeGridActions.js';
+
+function ControlButtons ({ dispatch }) {
+	let intervalId;
+
+	const intervalCallback = () => dispatch(nextGen());
+	const onStartClick = () => {
+		if (!intervalId) {
+			intervalId = setInterval(intervalCallback, 1000);
+		}
+	};
+	const onStopClick = () => {
+		clearInterval(intervalId);
+		intervalId = null;
+	};
+
 	return (
 		<div>
-			<button onClick={() => {
-				if (!interval) {
-					setTick(setInterval(
-							onStartClick,
-							1000
-						)
-					);
-				}
-			}}>
+			<button	onClick={ onStartClick }>
 				Start
 			</button>
-			<button onClick={() => {
-				resetTick(interval);
-			}}>
+			<button	onClick={ onStopClick }>
 				Stop
 			</button>
 		</div>
 	);
 };
 
-
-const mapStateToProps = (state) => {
-	return {
-		interval: state.interval
-	};
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-	return {
-    	onStartClick: () => {
-	      	dispatch({
-	      		type: 'NEXT_GEN',
-	      	});
-    	},
-    	setTick: (interval) => {
-    		dispatch({
-    			type: 'SET_INTERVAL',
-    			interval
-    		});
-    	},
-    	resetTick: (interval) => {
-    		dispatch({
-    			type: 'RESET_INTERVAL'
-    		});
-    	}
-  	};
-};
-
-const Controls = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(ControlButtons);
-
-
-export default Controls;
+export default connect()(ControlButtons);

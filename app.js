@@ -6,14 +6,14 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 
 // Reducers
-import gameOfLife from './reducers/gameOfLife'
+import rootReducer from './reducers/rootReducer'
 
 // Components
 import CanvasGrid from './components/CanvasGrid';
 import Init from './components/Init';
 import ControlPanel from './components/ControlPanel';
 
-const store = createStore(gameOfLife);
+const store = createStore(rootReducer);
 
 store.dispatch({
 	type: 'CREATE',
@@ -37,7 +37,7 @@ const App = () => (
 );
 
 ReactDOM.render(
-	<Provider store={store}>
+		<Provider store={store}>
   		<App />
   	</Provider>,
   	document.getElementById('root')

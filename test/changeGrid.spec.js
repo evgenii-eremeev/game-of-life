@@ -2,14 +2,14 @@
 
 import deepFreeze from 'deep-freeze';
 import expect from 'expect';
-import changeGrid from '../reducers/changeGrid';
+import changeGridReducer from '../reducers/changeGridReducer';
 
-describe('changeGrid', () => {
+describe('changeGridReducer', () => {
   describe('NEXT_GEN', () => {
     it('if passed "undefined" should return []', () => {
-      const action = { type: 'NEXT_GEN'}
+      const action = { type: 'NEXT_GEN' }
       expect(
-        changeGrid(undefined, action)
+        changeGridReducer(undefined, action)
       ).toEqual([]);
     });
 
@@ -34,7 +34,7 @@ describe('changeGrid', () => {
       deepFreeze(action);
 
       expect(
-        changeGrid(gridBefore, action)
+        changeGridReducer(gridBefore, action)
       ).toEqual(gridAfter);
     });
 
@@ -46,7 +46,7 @@ describe('changeGrid', () => {
       deepFreeze(gridBefore);
 
       expect(
-        changeGrid(gridBefore, {})
+        changeGridReducer(gridBefore, {})
       ).toEqual(gridBefore);
     });
   });
@@ -69,7 +69,7 @@ describe('changeGrid', () => {
       deepFreeze(action);
 
       expect(
-        changeGrid([], action)
+        changeGridReducer([], action)
       ).toEqual(gridAfter);
 
     });
@@ -92,7 +92,7 @@ describe('changeGrid', () => {
       ];
 
       expect(
-        changeGrid(gridBefore, action)
+        changeGridReducer(gridBefore, action)
       ).toEqual(gridAfter);
 
     });
@@ -113,7 +113,7 @@ describe('changeGrid', () => {
       ];
 
       expect(
-        changeGrid(gridBefore, action)
+        changeGridReducer(gridBefore, action)
       ).toEqual(gridAfter);
     });
   });
@@ -133,15 +133,15 @@ describe('changeGrid', () => {
       };
 
       expect(
-        changeGrid(gridBefore, action)
+        changeGridReducer(gridBefore, action)
       ).toNotEqual(gridBefore);
 
       expect(
-        changeGrid(gridBefore, action).length
+        changeGridReducer(gridBefore, action).length
       ).toBe(gridBefore.length);
 
-      expect(   
-        changeGrid(gridBefore, action)[0].length
+      expect(
+        changeGridReducer(gridBefore, action)[0].length
       ).toBe(gridBefore[0].length);
     });
   });
