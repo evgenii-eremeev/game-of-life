@@ -26,9 +26,7 @@ const Grid = ({ state, dispatch }) => {
 };
 
 const mapStateToProps = (state) => {
-	return {
-		state: state.changeGrid
-	}
+	return { state };
 };
 
 export default connect(mapStateToProps)(Grid);
