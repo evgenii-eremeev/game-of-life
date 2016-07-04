@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "",
+    "start": "webpack-dev-server",
     "test": "mocha --compilers js:babel-register --recursive"
   },
   "repository": {
