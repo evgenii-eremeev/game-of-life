@@ -2,48 +2,90 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-	nextGen, randomGrid, resetGrid
+	nextGen, randomGrid, resetGrid, createGrid
 } from '../actions/changeGridActions.js';
 
-function ControlPanel ({ dispatch }) {
-	let intervalId;
+class ControlPanel extends React.Component {
 
-	const intervalCallback = () => dispatch(nextGen());
-	const onStartClick = () => {
-		if (!intervalId) {
-			intervalId = setInterval(intervalCallback, 1000);
+	constructor (props) {
+		super(props);
+
+		this._onStartClick = this._onStartClick.bind(this);
+		this._onStopClick = this._onStopClick.bind(this);
+		this._onNextClick = this._onNextClick.bind(this);
+		this._onRandomClick = this._onRandomClick.bind(this);
+		this._onResetClick = this._onResetClick.bind(this);
+
+		this.state = {
+			intervalId: null,
+			gen: 0
+		}
+	}
+
+	componentDidMount() {
+		const { dispatch } = this.props;
+		dispatch(createGrid(50, 30));
+		dispatch(randomGrid(0.3));
+		this._onStartClick();
+	}
+
+	componentWillUnmount() {
+		this._onStopClick();
+	}
+
+	_onStartClick() {
+		const { dispatch } = this.props;
+		if (!this.state.intervalId) {
+			this.setState({
+				intervalId: setInterval(this._onNextClick, 500)
+			});
 		}
 	};
-	const onStopClick = () => {
-		clearInterval(intervalId);
-		intervalId = null;
-	};
-	const onNextClick = () => dispatch(nextGen());
-	const onRandomClick = () => dispatch(randomGrid(0.4));
-	const onResetClick = () => {
-		dispatch(resetGrid());
-		onStopClick(); // clearInterval
+
+	_onStopClick() {
+		clearInterval(this.state.intervalId);
+		this.setState({ intervalId: null });
+	}
+
+	_onNextClick() {
+		this.props.dispatch(nextGen());
+		this.setState({
+			gen: this.state.gen + 1
+		})
+	}
+
+	_onRandomClick() {
+		this.props.dispatch(randomGrid(0.4));
+	}
+
+	_onResetClick() {
+		this.props.dispatch(resetGrid());
+		this._onStopClick(); // clearInterval
+		this.setState({ gen: 0 });
 	};
 
-	return (
-		<div>
-			<button	onClick={onStartClick}>
-				Start
-			</button>
-			<button	onClick={onStopClick}>
-				Stop
-			</button>
-			<button	onClick={onNextClick}>
-				Next
-			</button>
-			<button onClick={onRandomClick}>
-				Random
-			</button>
-			<button onClick={onResetClick}>
-				Reset
-			</button>
-		</div>
-	);
-};
+	render () {
+		return (
+			<div>
+				<button	onClick={this._onStartClick} className="start">
+					Start
+				</button>
+				<button	onClick={this._onStopClick} className="stop">
+					Stop
+				</button>
+				<button	onClick={this._onNextClick} className="next">
+					Next
+				</button>
+				<button onClick={this._onRandomClick} className="random">
+					Random
+				</button>
+				<button onClick={this._onResetClick} className="reset">
+					Reset
+				</button>
+				<p className="generation">Generation: {this.state.gen}</p>
+			</div>
+		);
+	}
+}
 
 export default connect()(ControlPanel);
